@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <meta charset="UTF-8">
+    <title>登录界面</title>
+</head>
+<body role="document">
+<!--导航栏-->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/loginPage/">客户管理系统</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/loginPage/">发布会</a></li>
+                <li><a href="/guestMange/">嘉宾</a></li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">{{user}}</a></li>
+                <li><a href="/logout/">退出</a></li>
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+<!--搜索-->
+<div class="page-header" style="padding-top:60px">
+    <div id="navbar1" class="navbar-collapse collapse">
+        <form class="navbar-form" method="get" action="/search_name/">
+            <div class="form-group">
+                <input name="name" type="text" placeholder="名称" class="form-control"/>
+            </div>
+            <button type="submit" class="btn btn-success">搜索</button>
+        </form>
+    </div>
+</div>
+<!--发布会列表-->
+<div class="row" style="padding-top: 30px;">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>id</th><th>名称</th><th>状态</th><th>地址</th><th>时间</th><th>签到</th><th>嘉宾</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for event in events %}
+            <tr>
+                <td>{{ event.id }}</td>
+                <td><a href="/guestEvent/{{ event.id }}/">{{ event.name }}</a></td>
+                <td>{{ event.status }}</td>
+                <td>{{ event.address }}</td>
+                <td>{{ event.time }}</td>
+                <td>
+                    <a href="/sign_index/{{ event.id }}/">sign</a>
+                </td>
+                <td>
+                    <a href="/add_guest/{{ event.id }}/">添加嘉宾</a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+</body>
+</html>
