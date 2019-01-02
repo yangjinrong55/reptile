@@ -1,0 +1,49 @@
+#coding=utf-8
+from appium import webdriver
+import time
+
+desired_caps = {}
+desired_caps['platformName'] = 'Android'
+desired_caps['platformVersion'] = '8.0'
+desired_caps['deviceName'] = '8BN0217923000752'
+driver = webdriver.Remote('http://127.0.0.1:4723/wd/hub', desired_caps)
+#指向APPIUM的IP端口，监听的配置文件
+#http://127.0.0.1:4723/wd/hub访问appium的代码路径
+
+time.sleep(5)
+driver.implicitly_wait(30)#30秒内不断如地寻找元素是否加载完成，当前元素里面是否有下一个元素，如果找到了就立即执行下一步
+
+driver.find_element_by_id("com.fanwe.p2p:id/view_simple_menu_item_txt_title").click()
+
+
+#XPATH公式
+#//class属性值[contains(@index,index值)]
+
+driver.find_element_by_xpath('//android.widget.EditText[contains(@index,0)]').send_keys("syunke")
+#driver.find_element_by_id("com.fanwe.p2p:id/act_login_et_username").send_keys("syunke")
+time.sleep(3)
+
+#driver.find_element_by_xpath('//android.widget.LinearLayout[contains(@index,1)]/android.widget.LinearLayout[contains(@index,1)]/android.widget.EditText[contains(@index,0)]').send_keys("s123456")
+driver.find_element_by_id("com.fanwe.p2p:id/act_login_et_password").send_keys("s123456")
+time.sleep(5)
+driver.find_element_by_id("com.fanwe.p2p:id/act_login_btn_login").click()#提交登录
+time.sleep(5)
+driver.find_element_by_id("com.fanwe.p2p:id/view_simple_title_img_left").click()#点击菜单
+time.sleep(5)
+driver.find_element_by_name(u"文章资讯").click()
+
+#execute_script坐标点击函数，touchCount点击次数
+#driver.execute_script("mobile: tap", {"touchCount":"1", "x":"220", "y":"1150"})#文章资讯
+time.sleep(3)
+driver.swipe(800,200,800,500,3000)#坐标位移函数，通常用来处理滑屏操作,
+# 里面的参数是：开始的X坐标，Y坐标，结束的X坐标，结束的Y坐标，持续滑动时间毫秒
+
+
+
+
+
+
+
+
+
+
